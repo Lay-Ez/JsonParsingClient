@@ -17,8 +17,10 @@ import java.util.Scanner;
 
 public class EmployeeLoaderImpl implements EmployeeLoader {
 
+    private static final String BASE_URL = "https://raw.githubusercontent.com/Lay-Ez/JsonParsing/master/";
+
     private final Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://raw.githubusercontent.com/Lay-Ez/JsonParsing/master/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
@@ -33,18 +35,19 @@ public class EmployeeLoaderImpl implements EmployeeLoader {
 
     @Override
     public List<Employee> loadEmployeesFromFile(String path) throws IOException {
-        Scanner scanner = new Scanner(new File("employees.txt"));
-        String json = scanner.useDelimiter("\\Z").next();
-        Type employeeListType = new TypeToken<ArrayList<Employee>>(){}.getType();
-        return gson.<ArrayList<Employee>>fromJson(json, employeeListType);
+        try (Scanner scanner = new Scanner(new File(path))){
+            String json = scanner.useDelimiter("\\Z").next();
+            Type employeeListType = new TypeToken<ArrayList<Employee>>(){}.getType();
+            return gson.<ArrayList<Employee>>fromJson(json, employeeListType);
+        }
     }
 
     @Override
     public void saveEmployeesToFile(String path, List<Employee> employees) throws IOException {
-        File file = new File(path);
-        PrintStream out = new PrintStream(file);
-        String json = gson.toJson(employees);
-        out.print(json);
+        try (PrintStream out = new PrintStream(new File(path))) {
+            String json = gson.toJson(employees);
+            out.print(json);
+        }
     }
 }
 

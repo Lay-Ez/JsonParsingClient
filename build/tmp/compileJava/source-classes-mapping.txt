@@ -4,10 +4,10 @@ com/company/model/Employee.java
  com.company.model.EmployeeType
 com/company/loader/JsonGitHubApi.java
  com.company.loader.JsonGitHubApi
+com/company/loader/EmployeeLoader.java
+ com.company.loader.EmployeeLoader
 com/company/loader/EmployeeLoaderImpl.java
  com.company.loader.EmployeeLoaderImpl
  com.company.loader.EmployeeLoaderImpl$1
 com/company/Main.java
  com.company.Main
-com/company/loader/EmployeeLoader.java
- com.company.loader.EmployeeLoader
