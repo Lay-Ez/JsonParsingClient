@@ -2,6 +2,7 @@ package com.company.loader;
 
 import com.company.model.Employee;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -19,13 +20,16 @@ public class EmployeeLoaderImpl implements EmployeeLoader {
 
     private static final String BASE_URL = "https://raw.githubusercontent.com/Lay-Ez/JsonParsing/master/";
 
+    private final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Employee.class, new EmployeeSerializer())
+            .create();
+
     private final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
 
     private final JsonGitHubApi jsonGitHubApi = retrofit.create(JsonGitHubApi.class);
-    private final Gson gson = new Gson();
 
     @Override
     public List<Employee> loadEmployeesFromNet() throws IOException {

@@ -43,6 +43,10 @@ public class Employee {
         return name;
     }
 
+    public double getRate() {
+        return rate;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -53,11 +57,4 @@ public class Employee {
                 ", avgMonthly=" + getAvgMonthlySalary() + '\'' +
                 '}';
     }
-}
-
-enum EmployeeType {
-    @SerializedName("hourly")
-    HOURLY,
-    @SerializedName("monthly")
-    MONTHLY
 }
