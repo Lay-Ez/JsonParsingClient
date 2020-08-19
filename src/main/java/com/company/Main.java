@@ -22,6 +22,5 @@ public class Main {
         System.out.println("Loading employees from file");
         List<Employee> employeesFromFile = employeeLoader.loadEmployeesFromFile(FILE_PATH);
         employeesFromFile.forEach(System.out::println);
-
     }
 }
