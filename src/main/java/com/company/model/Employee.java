@@ -1,7 +1,5 @@
 package com.company.model;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Employee {
 
     private EmployeeType type;
