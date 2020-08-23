@@ -2,10 +2,13 @@ package com.company.model;
 
 public class Employee {
 
-    private EmployeeType type;
-    private String id;
-    private String name;
-    private double rate;
+    private final static double AVG_WORKING_DAYS_PER_MONTH = 20.8;
+    private final static double AVG_WORKING_HOURS_PER_DAY = 8;
+
+    private final EmployeeType type;
+    private final String id;
+    private final String name;
+    private final double rate;
 
     public Employee(EmployeeType type, String id, String name, double rate) {
         this.type = type;
@@ -19,7 +22,7 @@ public class Employee {
         switch (type) {
 
             case HOURLY:
-                return 20.8 * 8 * rate;
+                return AVG_WORKING_DAYS_PER_MONTH * AVG_WORKING_HOURS_PER_DAY * rate;
 
             case MONTHLY:
                 return rate;
